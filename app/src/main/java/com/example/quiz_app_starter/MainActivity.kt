@@ -58,7 +58,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainMenuScreen(
     bestScore: Int = 0,
-    modifier: Modifier
+    modifier: Modifier = Modifier,
+    onPlayClicked: () -> Unit = {}  // ADD THIS
 ) {
     val darkTheme = isSystemInDarkTheme()
     Column(
@@ -146,7 +147,8 @@ fun MainMenuScreen(
         Spacer(modifier = Modifier.height(24.dp))
 
         Button(
-            onClick = { android.util.Log.d("MainMenu", "Play button clicked!") },
+            onClick = { android.util.Log.d("MainMenu", "Play button clicked!")
+                onPlayClicked()},
             modifier = Modifier
                 .fillMaxWidth(0.6f)
                 .shadow(

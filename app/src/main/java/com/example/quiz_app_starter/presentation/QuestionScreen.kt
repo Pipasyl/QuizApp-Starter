@@ -20,6 +20,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.material3.RadioButtonDefaults
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -65,13 +68,23 @@ fun QuestionScreen(
         )
         },
         bottomBar = {
-            Button(
-                onClick = {},
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.Center
             ) {
-                Text("Submit")
+                Button(
+                    onClick = {},
+                    modifier = Modifier
+                        .fillMaxWidth(0.6f)
+                        .padding(16.dp),
+                    shape = RoundedCornerShape(50.dp)
+                ) {
+                    Text(
+                        "Submit",
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.ExtraBold
+                    )
+                }
             }
         }
     ) { innerPadding ->
@@ -118,16 +131,21 @@ fun AnswerCard(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(8.dp)
         ) {
-            RadioButton(selected = isSelected, onClick = onSelect)
+            RadioButton(
+                selected = isSelected,
+                onClick = onSelect,
+                colors = RadioButtonDefaults.colors(
+                    selectedColor = MaterialTheme.colorScheme.secondary
+                )
+            )
             Text(text = answer)
         }
     }
 
 }
-@Preview(showBackground = true, device = "spec:width=411dp,height=891dp,dpi=420", showSystemUi = true)
+@Preview(showBackground = true, name = "Light", device = "spec:width=411dp,height=891dp,dpi=420", showSystemUi = true)
+@Preview(showBackground = true, name = "Dark", device = "spec:width=411dp,height=891dp,dpi=420", showSystemUi = true, uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun QuestionScreenPreview() {
-    QuizappstarterTheme {
-        QuestionScreen()
-    }
+    QuizappstarterTheme { QuestionScreen() }
 }
